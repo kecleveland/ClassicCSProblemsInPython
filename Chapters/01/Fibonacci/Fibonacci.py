@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Generator
 from functools import lru_cache
 
 memo: Dict[int, int] = {0: 0, 1: 1} # base cases
@@ -39,15 +39,28 @@ def fib5(n: int) -> int:
         # next = last + temp 
     return next
 
+def fib6(n: int) -> Generator[int, None, None]:
+    yield 0 # special case
+    if n > 0: yield 1 # special case
+    last: int = 0
+    next: int = 1
+    for _ in range(1, n):
+        last, next = next, last + next
+        yield next # main generation step 
+
 #test
 if __name__ == "__main__":
-    print(fib2(0))
-    print(fib2(1))
-    print(fib2(2))
-    print(fib2(3))
-    print(fib2(4))
-    print(fib2(5)) 
-    print(fib3(50))
-    print(fib4(50))
-    print(fib5(5))
-    print(fib5(50))
+    # print(fib2(0))
+    # print(fib2(1))
+    # print(fib2(2))
+    # print(fib2(3))
+    # print(fib2(4))
+    # print(fib2(5)) 
+    # print(fib3(50))
+    # print(fib4(50))
+    # print(fib5(5))
+    # print(fib5(50))
+    
+    # generating
+    for i in fib6(50):
+        print(i)
