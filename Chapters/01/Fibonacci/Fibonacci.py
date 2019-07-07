@@ -12,11 +12,13 @@ def fib2(n: int) -> int:
         return n
     # recursive way 
     return fib2(n-1) + fib2(n-2)
+
+#memoization 
 def fib3(n: int) -> int:
     if n not in memo:
         memo[n] = fib3(n-1) + fib3(n-2)
     return memo[n]
-    
+
 #test
 if __name__ == "__main__":
     print(fib2(0))
@@ -25,5 +27,4 @@ if __name__ == "__main__":
     print(fib2(3))
     print(fib2(4))
     print(fib2(5)) 
-    print(fib2(5))
     print(fib3(50))
