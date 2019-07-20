@@ -6,7 +6,7 @@ class CompressedGene:
     def _compress(self, gene: str) -> None:
         self.bit_string: int = 1 # sentinel
         for nucleotide in gene.upper():
-            self.bit_string << 2 #shift left 2 bits
+            self.bit_string <<= 2 #shift left 2 bits
             if nucleotide == "A":
                 self.bit_string |= 0b00
             elif nucleotide == "C":
@@ -23,24 +23,24 @@ class CompressedGene:
         for i in range(0, self.bit_string.bit_length() - 1, 2): # -1 to exclude sentinel
             bits: int = self.bit_string >> i & 0b11 # get the 2 relevant bits
             if bits == 0b00:
-                gene+= "A"
+                gene += "A"
             elif bits == 0b01:
                 gene += "C"
-            elif bits ==0b10:
+            elif bits == 0b10:
                 gene += "G"
             elif bits == 0b11:
-                gene+= "T"
+                gene += "T"
             else:
                 raise ValueError("Invalid bits:{}".format(bits))
             return gene[::-1] # reverse by slicing backwards
     
-    def __str__(self): # str representation
+    def __str__(self) -> str: # str representation
         return self.decompress()
 
 if __name__ == "__main__":
     from sys import getsizeof
     original: str = "TAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATATAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATA" * 100
-    print("original is {} bytes".format(getsizeof(original)))
+    print("Original is {} bytes".format(getsizeof(original)))
     compressed: CompressedGene = CompressedGene(original)
     print("compressed is {} bytes".format(getsizeof(compressed.bit_string)))
     print(compressed)
