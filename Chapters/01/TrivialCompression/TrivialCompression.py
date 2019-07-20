@@ -37,15 +37,12 @@ class CompressedGene:
     def __str__(self): # str representation
         return self.decompress()
 
-# if __name__ == "__main__":
-#     from sys import getsizeof
-#     original: str = "" * 100 # get original bytes using str # TODO GET ORIGINAL
-#     print("original is {} bytes".format(getsizeof(original)))
-#     compressed: CompressedGene = CompressedGene(original)
-#     print("compressed is {} bytes".format(getsizeof(compressed.bit_string)))
-#     print(compressed)
-#     print("original and decompressed are the same: {}".format(original == compressed.decompress()))
-
-
-
+if __name__ == "__main__":
+    from sys import getsizeof
+    original: str = "TAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATATAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATA" * 100
+    print("original is {} bytes".format(getsizeof(original)))
+    compressed: CompressedGene = CompressedGene(original)
+    print("compressed is {} bytes".format(getsizeof(compressed.bit_string)))
+    print(compressed)
+    print("original and decompressed are the same: {}".format(original == compressed.decompress()))
 
