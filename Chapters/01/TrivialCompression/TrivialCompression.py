@@ -32,8 +32,8 @@ class CompressedGene:
                 gene += "T"
             else:
                 raise ValueError("Invalid bits:{}".format(bits))
-            return gene[::-1] # reverse by slicing backwards
-    
+        return gene[::-1] # reverse by slicing backwards
+
     def __str__(self) -> str: # str representation
         return self.decompress()
 
